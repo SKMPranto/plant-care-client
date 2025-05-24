@@ -1,4 +1,4 @@
-import React, { use } from "react";
+import React, { useEffect } from "react";
 import { HiOutlineLogout } from "react-icons/hi";
 import { Link, NavLink } from "react-router";
 // import { AuthContext } from "../Context/AuthContext";
@@ -9,6 +9,21 @@ const Navbar = () => {
   //   const handleLogOut = () => {
   //     userLogOut();
   //   };
+
+  // Theme Toggler
+
+  // On toggle
+  const handleThemeToggle = (e) => {
+    const theme = e.target.checked ? "dark" : "light";
+    document.documentElement.setAttribute("data-theme", theme);
+    localStorage.setItem("theme", theme);
+  };
+
+  // On load (e.g. in useEffect)
+  useEffect(() => {
+    const savedTheme = localStorage.getItem("theme") || "light";
+    document.documentElement.setAttribute("data-theme", savedTheme);
+  }, []);
 
   return (
     <div className="navbar p-0 bg-base-100 mt-2 mb-4">
@@ -95,7 +110,7 @@ const Navbar = () => {
             src="https://i.ibb.co/XfMbvWqY/Green-leaves-logo-2-removebg-preview.png"
             alt="Image"
           />
-          <span className="font-bold md:text-3xl tagesschrift-regular text-green-200">
+          <span className="font-bold md:text-3xl tagesschrift-regular text-green-500">
             Plant Care
           </span>
         </NavLink>
@@ -196,6 +211,63 @@ const Navbar = () => {
             </Link>
           )}
         </div> */}
+        {/* Theme toggle Button */}
+        <div className="navbar p-0 bg-base-100 mt-2 mb-4">
+          {/* ... your other navbar code ... */}
+          <div className="navbar-end space-x-1">
+            {/* Theme toggle Button */}
+            <div>
+              <label className="toggle text-base-content">
+                <input
+                  type="checkbox"
+                  onChange={handleThemeToggle}
+                  value="synthwave"
+                  className="theme-controller"
+                />
+
+                <svg
+                  aria-label="sun"
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 24 24"
+                >
+                  <g
+                    strokeLinejoin="round"
+                    strokeLinecap="round"
+                    strokeWidth="2"
+                    fill="none"
+                    stroke="currentColor"
+                  >
+                    <circle cx="12" cy="12" r="4"></circle>
+                    <path d="M12 2v2"></path>
+                    <path d="M12 20v2"></path>
+                    <path d="m4.93 4.93 1.41 1.41"></path>
+                    <path d="m17.66 17.66 1.41 1.41"></path>
+                    <path d="M2 12h2"></path>
+                    <path d="M20 12h2"></path>
+                    <path d="m6.34 17.66-1.41 1.41"></path>
+                    <path d="m19.07 4.93-1.41 1.41"></path>
+                  </g>
+                </svg>
+
+                <svg
+                  aria-label="moon"
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 24 24"
+                >
+                  <g
+                    strokeLinejoin="round"
+                    strokeLinecap="round"
+                    strokeWidth="2"
+                    fill="none"
+                    stroke="currentColor"
+                  >
+                    <path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"></path>
+                  </g>
+                </svg>
+              </label>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   );
