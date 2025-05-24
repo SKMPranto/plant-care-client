@@ -1,4 +1,5 @@
 import React from "react";
+import Banner from "../Components/Banner";
 
 const Home = () => {
   return (
@@ -11,7 +12,9 @@ const Home = () => {
           more. Keep your plants alive with Plant Care !
         </p>
       </div>
-      <div className="md:w-[50%] bg-red-100">55</div>
+      <div className="md:w-[45%]">
+        <Banner></Banner>
+      </div>
     </div>
   );
 };

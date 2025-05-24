@@ -5,3 +5,17 @@
 * {
   font-family: "Open Sans", sans-serif;
 }
+html {
+  scroll-behavior: smooth; /* optional for smooth scroll */
+}
+
+body {
+  scroll-padding-top: 0; /* no extra offset */
+  overflow-anchor: none; /* prevent layout shift on hash changes */
+}
+
+/* Prevent jumping on :target */
+:target {
+  scroll-margin-top: 0 !important;
+  scroll-behavior: auto !important;
+}
