@@ -7,10 +7,12 @@ import AllPlants from "../Pages/AllPlants";
 import MyPlants from "../Pages/MyPlants";
 import Login from "../Pages/Login";
 import Register from "../Pages/Register";
+import ErrorPage from "../Pages/ErrorPage";
 
 export const Routes = createBrowserRouter([
     {
         path:"/",
+        errorElement:<ErrorPage></ErrorPage>,
         Component:MainLayOut,
         children:[
             {

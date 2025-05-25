@@ -21,7 +21,7 @@ const Navbar = () => {
 
   // On load (e.g. in useEffect)
   useEffect(() => {
-    const savedTheme = localStorage.getItem("theme") || "light";
+    const savedTheme = localStorage.getItem("theme") || "dark";
     document.documentElement.setAttribute("data-theme", savedTheme);
   }, []);
 
@@ -110,7 +110,7 @@ const Navbar = () => {
             src="https://i.ibb.co/XfMbvWqY/Green-leaves-logo-2-removebg-preview.png"
             alt="Image"
           />
-          <span className="font-bold md:text-3xl tagesschrift-regular text-green-500">
+          <span className="font-bold md:text-3xl tagesschrift-regular text-green-500 permanent-marker-regular">
             Plant Care
           </span>
         </NavLink>

@@ -12,7 +12,7 @@ const Footer = () => {
           className="text-xl cursor-pointer flex items-center gap-3"
         >
           <img className="w-8 md:w-10" src="https://i.ibb.co/XfMbvWqY/Green-leaves-logo-2-removebg-preview.png" alt="Image" />
-          <span className="tagesschrift-regular font-bold md:text-3xl">Plant Care</span>
+          <span className="tagesschrift-regular font-bold md:text-3xl permanent-marker-regular">Plant Care</span>
         </NavLink>
         <nav className="grid grid-flow-col gap-4 pl-12 md:pl-0">
           <ul className="menu menu-horizontal px-1">

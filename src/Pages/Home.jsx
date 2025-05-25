@@ -1,10 +1,12 @@
 import React from "react";
 import Banner from "../Components/Banner";
+import Title from "../Components/Title";
 
 const Home = () => {
+    Title("Home")
   return (
     <div className="md:flex justify-align-center">
-      <div className="md:w-[50%] text-center md:text-left lg:px-15">
+      <div className="md:w-[50%] text-center md:text-left lg:px-15 md:pt-15 lg:pt-10">
         <h1 className="text-5xl lg:text-8xl">Keep your <br /> plants alive</h1>
         <p className="py-7 lg:text-lg">
           Individual care schedule and reminders for your plants, <br className="hidden lg:block" />
