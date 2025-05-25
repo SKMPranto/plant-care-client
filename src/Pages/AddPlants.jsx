@@ -2,13 +2,14 @@ import React from "react";
 import Title from "../Components/Title";
 
 const AddPlants = () => {
-  const handleSubmit = (e)=>{
+  const handleSubmit = (e) => {
     e.preventDefault();
     const form = e.target;
-    const userName = form.userName.value;
-
-  }
-  Title("Add Plants")
+    const formData = new FormData(form);
+    const plantData = Object.fromEntries(formData.entries());
+    console.log(plantData);
+  };
+  Title("Add Plants");
   return (
     <div className="p-10 lg:w-[70%] mx-auto">
       <h1 className="text-3xl md:text-5xl lg:text-7xl text-center permanent-marker-regular">
@@ -18,7 +19,6 @@ const AddPlants = () => {
         You can add plants here and monitor them
       </p>
       <form onSubmit={handleSubmit}>
-        
         <div className="grid grid-cols-1 md:grid-cols-2 gap-2">
           {/* User Name Input Field */}
           <fieldset>
@@ -111,11 +111,33 @@ const AddPlants = () => {
                 required
               />
               <datalist id="Category">
-                <option value="Chrome"></option>
-                <option value="Firefox"></option>
-                <option value="Safari"></option>
-                <option value="Opera"></option>
-                <option value="Edge"></option>
+                {/* Fruit & Shade Trees */}
+                <option value="Lemon Tree"></option>
+                <option value="Mango Tree"></option>
+                <option value="Guava Tree"></option>
+                <option value="OliveT ree"></option>
+                <option value="Dwarf Apple"></option>
+
+                {/* Flowering Plants */}
+                <option value="Rose"></option>
+                <option value="Hibiscus"></option>
+                <option value="Marigold"></option>
+                <option value="Lavender"></option>
+                <option value="Sunflower"></option>
+
+                {/* Herbs */}
+                <option value="Basil"></option>
+                <option value="Mint"></option>
+                <option value="Thyme"></option>
+                <option value="Coriander"></option>
+                <option value="Rosemary"></option>
+
+                {/* Decorative/Other Garden Plants */}
+                <option value="Bougainvillea"></option>
+                <option value="AloeVera"></option>
+                <option value="Jasmine"></option>
+                <option value="MoneyPlant"></option>
+                <option value="SnakePlant"></option>
               </datalist>
             </label>
             <p className="validator-hint hidden">Please Select a Category</p>
@@ -132,9 +154,9 @@ const AddPlants = () => {
                 required
               />
               <datalist id="care-level">
-                <option value="easy"></option>
-                <option value="moderate"></option>
-                <option value="difficult"></option>
+                <option value="Easy"></option>
+                <option value="Moderate"></option>
+                <option value="Difficult"></option>
               </datalist>
             </label>
             <p className="validator-hint hidden">Please Select Care Level</p>
@@ -172,11 +194,7 @@ const AddPlants = () => {
           <fieldset>
             <legend className="fieldset-legend">Last Watered Date</legend>
             <label className="input validator w-full">
-              <input
-                type="date"
-                name="lastWateredDate"
-                required
-              />
+              <input type="date" name="lastWateredDate" required />
             </label>
             <p className="validator-hint hidden">
               Please Select Last Watered Date
@@ -186,11 +204,7 @@ const AddPlants = () => {
           <fieldset>
             <legend className="fieldset-legend">Next Watering Date</legend>
             <label className="input validator w-full">
-              <input
-                type="date"
-                name="nextWateringDate"
-                required
-              />
+              <input type="date" name="nextWateringDate" required />
             </label>
             <p className="validator-hint hidden">
               Please Select Next Watering Date
@@ -208,17 +222,17 @@ const AddPlants = () => {
                 required
               />
               <datalist id="healthStatus">
-                <option value="healthy">Healthy</option>
-                <option value="newGrowth">Healthy with New Growth</option>
-                <option value="wilting">Wilting</option>
-                <option value="yellowLeaves">Yellowing Leaves</option>
-                <option value="dryLeaves">Dry or Crispy Leaves</option>
-                <option value="pestInfected">Pest Infected</option>
-                <option value="fungalInfection">Fungal Infection</option>
-                <option value="rootRot">Root Rot Suspected</option>
-                <option value="needsRepotting">Needs Repotting</option>
-                <option value="recovering">Recovering</option>
-                <option value="dead">Dead</option>
+                <option value="Healthy"></option>
+                <option value="Healthy with New Growth"></option>
+                <option value="Wilting"></option>
+                <option value="Yellow Leaves"></option>
+                <option value="Dry or Crispy Leaves"></option>
+                <option value="Pest Infected"></option>
+                <option value="Fungal Infection"></option>
+                <option value="rooRoot Rot SuspectedtRot"></option>
+                <option value="Needs Repotting"></option>
+                <option value="Recovering"></option>
+                <option value="Dead">Dead</option>
               </datalist>
             </label>
             <p className="validator-hint hidden">Please Select Health Status</p>
