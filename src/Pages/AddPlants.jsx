@@ -1,13 +1,35 @@
 import React from "react";
 import Title from "../Components/Title";
+import Swal from "sweetalert2";
 
 const AddPlants = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     const form = e.target;
     const formData = new FormData(form);
-    const plantData = Object.fromEntries(formData.entries());
-    console.log(plantData);
+    const newPlantData = Object.fromEntries(formData.entries());
+
+    // send Plant data to mongodb database
+
+    fetch("http://localhost:3000/plants", {
+      method: "POST",
+      headers: {
+        "content-type": "application/json",
+      },
+      body: JSON.stringify(newPlantData),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.insertedId) {
+          Swal.fire({
+            position: "center",
+            icon: "success",
+            title: "New Plant Added Successfully",
+            showConfirmButton: false,
+            timer: 1500,
+          });
+        }
+      });
   };
   Title("Add Plants");
   return (
