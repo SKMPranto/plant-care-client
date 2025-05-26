@@ -12,47 +12,50 @@ import Spinner from "../Components/Spinner";
 import PlantsDetails from "../Pages/PlantsDetails";
 
 export const Routes = createBrowserRouter([
-    {
-        path:"/",
-        errorElement:<ErrorPage></ErrorPage>,
-        Component:MainLayOut,
-        children:[
-            {
-                index:true,
-                hydrateFallbackElement:<Spinner></Spinner>,
-                loader:()=>fetch('http://localhost:3000/plants'),
-                Component:Home
-            },
-            {
-                path:"/Add-Plants",
-                Component:AddPlants
-            },
-            {
-                path:"/All-Plants",
-                Component:AllPlants
-            },
-            {
-                path:"/My-Plants",
-                Component:MyPlants
-            },
-            {
-                path:"/Login",
-                Component:Login
-            },
-            {
-                path:"/Register",
-                Component:Register
-            },
-            {
-                path:"/Plants-Details/:id",
-                hydrateFallbackElement:<Spinner></Spinner>,
-                loader:({params})=>fetch(`http://localhost:3000/plants/${params.id}`),
-                Component:PlantsDetails
-            },
-            {
-                path:"*",
-                Component:ErrorPage
-            }
-        ]
-    }
-])
+  {
+    path: "/",
+    errorElement: <ErrorPage></ErrorPage>,
+    Component: MainLayOut,
+    children: [
+      {
+        index: true,
+        HydrateFallback: Spinner,
+        loader: () => fetch("http://localhost:3000/plants"),
+        Component: Home,
+      },
+      {
+        path: "/Add-Plants",
+        Component: AddPlants,
+      },
+      {
+        path: "/All-Plants",
+        HydrateFallback: Spinner,
+        loader: () => fetch("http://localhost:3000/plants"),
+        Component: AllPlants,
+      },
+      {
+        path: "/My-Plants",
+        Component: MyPlants,
+      },
+      {
+        path: "/Login",
+        Component: Login,
+      },
+      {
+        path: "/Register",
+        Component: Register,
+      },
+      {
+        path: "/Plants-Details/:id",
+        hydrateFallbackElement: <Spinner></Spinner>,
+        loader: ({ params }) =>
+          fetch(`http://localhost:3000/plants/${params.id}`),
+        Component: PlantsDetails,
+      },
+      {
+        path: "*",
+        Component: ErrorPage,
+      },
+    ],
+  },
+]);

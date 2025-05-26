@@ -14,17 +14,6 @@ const PlantsDetails = () => {
     healthStatus,
     description,
   } = useLoaderData();
-  console.log(
-    plantName,
-    category,
-    careLevel,
-    wateringFrequency,
-    url,
-    lastWateredDate,
-    nextWateringDate,
-    healthStatus,
-    description
-  );
   Title(`${plantName} Details`);
   return (
     <>

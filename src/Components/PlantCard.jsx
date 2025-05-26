@@ -5,11 +5,11 @@ const PlantCard = ({ plant }) => {
     const {plantName,category,careLevel,wateringFrequency,url,_id}= plant;
   return (
     <div className="card bg-base-300 w-96 shadow-gray-50 shadow-lg hover:shadow-2xl transition duration-300 ease-in-out transform hover:-translate-y-1">
-      <figure>
+      <figure className="w-full h-62 overflow-hidden">
         <img
           src={url}
           alt="Image"
-          className="transition duration-300 ease-in-out transform hover:-translate-y-1 h-65 object-contain w-full rounded-t-lg"
+          className="transition duration-300 ease-in-out transform hover:-translate-y-1 object-contain rounded-t-lg"
         />
       </figure>
       <div className="card-body transition duration-300 ease-in-out transform hover:-translate-y-1">
