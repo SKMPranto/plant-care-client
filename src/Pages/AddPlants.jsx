@@ -28,6 +28,7 @@ const AddPlants = () => {
             showConfirmButton: false,
             timer: 1500,
           });
+          form.reset();
         }
       });
   };
