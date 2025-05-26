@@ -44,8 +44,10 @@ export const Routes = createBrowserRouter([
                 Component:Register
             },
             {
-                path:"/PlantsDetails/:id",
-                Component:<PlantsDetails></PlantsDetails>
+                path:"/Plants-Details/:id",
+                hydrateFallbackElement:<Spinner></Spinner>,
+                loader:({params})=>fetch(`http://localhost:3000/plants/${params.id}`),
+                Component:PlantsDetails
             },
             {
                 path:"*",

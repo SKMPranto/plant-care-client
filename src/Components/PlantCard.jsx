@@ -9,7 +9,7 @@ const PlantCard = ({ plant }) => {
         <img
           src={url}
           alt="Image"
-          className="transition duration-300 ease-in-out transform hover:-translate-y-1 h-65 object-full"
+          className="transition duration-300 ease-in-out transform hover:-translate-y-1 h-65 object-contain w-full rounded-t-lg"
         />
       </figure>
       <div className="card-body transition duration-300 ease-in-out transform hover:-translate-y-1">
@@ -21,7 +21,7 @@ const PlantCard = ({ plant }) => {
         </div>
         <div className="card-actions justify-end">
           <NavLink
-            // to={`/PlantsDetails/${_id}`}
+            to={`/Plants-Details/${_id}`}
             className="btn bg-green-500 text-white hover:text-green-500 hover:bg-white hover:border-green-500  md:text-lg rounded md:font-extrabold w-full"
           >
             View More Details{" "}
