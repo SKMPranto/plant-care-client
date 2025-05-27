@@ -3,7 +3,7 @@ import Banner from "../Components/Banner";
 import Title from "../Components/Title";
 import PlantCardContainer from "../Components/PlantCardContainer";
 import { useLoaderData } from "react-router";
-import { AuthContext } from "../AuthContext/AuthContext";
+import OurFeatures from "../Components/OurFeatures";
 
 const Home = () => {
   
@@ -36,6 +36,10 @@ const Home = () => {
       {/* Plant Card Container */}
       <section className="Plants-Container my-10 lg:my-20">
           <PlantCardContainer plants={plants}></PlantCardContainer>
+      </section>
+      {/* Features Section */}
+      <section>
+        <OurFeatures></OurFeatures>
       </section>
 
       
