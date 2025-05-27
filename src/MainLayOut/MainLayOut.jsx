@@ -17,7 +17,7 @@ const MainLayOut = () => {
   return (
     <div>
       {loading && <Spinner></Spinner>}
-      <div className="w-[97%] md:w-[95%] lg:w-[70%] mx-auto">
+      <div className="w-[97%] md:w-[95%] lg:w-[70%] mx-auto pt-[120px]">
         <header>
           <Navbar></Navbar>
         </header>

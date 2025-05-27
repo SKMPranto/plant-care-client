@@ -4,6 +4,7 @@ import Title from "../Components/Title";
 import PlantCardContainer from "../Components/PlantCardContainer";
 import { useLoaderData } from "react-router";
 import OurFeatures from "../Components/OurFeatures";
+import AboutUs from "../Components/AboutUs";
 
 const Home = () => {
   
@@ -41,8 +42,10 @@ const Home = () => {
       <section>
         <OurFeatures></OurFeatures>
       </section>
-
-      
+      {/* About Us Section */}
+      <section>
+        <AboutUs></AboutUs>
+      </section>
     </>
   );
 };
