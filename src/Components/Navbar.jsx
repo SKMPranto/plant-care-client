@@ -29,7 +29,7 @@ const Navbar = () => {
   }, []);
 
   return (
-    <div className="navbar p-0 bg-base-100 mt-2 mb-4">
+    <div className="navbar p-0  mt-2 mb-4 bg-base-100">
       <div className="navbar-start">
         <div className="dropdown">
           <div tabIndex={0} role="button" className="lg:hidden mr-4">
@@ -215,8 +215,7 @@ const Navbar = () => {
           )}
         </div>
         {/* Theme toggle Button */}
-        <div className="navbar p-0 bg-base-100 mt-2 mb-4">
-          {/* ... your other navbar code ... */}
+        <div className="navbar p-0 bg-base-100 mt-2 mb-4 w-23">
           <div className="navbar-end space-x-1">
             {/* Theme toggle Button */}
             <div>
