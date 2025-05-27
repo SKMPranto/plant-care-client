@@ -1,5 +1,11 @@
 import React, { use, useState } from "react";
-import { Link, Navigate, NavLink, useLocation, useNavigate } from "react-router";
+import {
+  Link,
+  Navigate,
+  NavLink,
+  useLocation,
+  useNavigate,
+} from "react-router";
 import Title from "../Components/Title";
 import { ImEye, ImEyeBlocked } from "react-icons/im";
 import { AuthContext } from "../AuthContext/AuthContext";
@@ -9,7 +15,7 @@ const Login = () => {
   Title("Login");
   // State to manage password visibility
   const [showPassword, SetShowPassword] = useState(false);
-  const { userLogin, googleLogin } = use(AuthContext);
+  const { userLogin, googleLogin, resetPassword } = use(AuthContext);
   const location = useLocation();
   const Navigate = useNavigate();
 
@@ -42,7 +48,7 @@ const Login = () => {
     form.reset();
   };
 
-const handleGoogleLogIn = () => {
+  const handleGoogleLogIn = () => {
     googleLogin()
       .then(() => {
         Navigate(location.state || "/"); // Navigate to the previous page or home
@@ -54,6 +60,41 @@ const handleGoogleLogIn = () => {
           text: error.message,
         });
       });
+  };
+
+  const sendResetPassword = () => {
+    Swal.fire({
+      title: "Reset Password",
+      input: "email",
+      inputLabel: "Enter your email address",
+      inputPlaceholder: "mail@site.com",
+      confirmButtonText: "Send Reset Link",
+      showCancelButton: true,
+    }).then((result) => {
+      if (result.isConfirmed && result.value) {
+        resetPassword(result.value)
+          .then(() => {
+            Swal.fire({
+              icon: "success",
+              title: "Password reset email sent",
+              showConfirmButton: true,
+            });
+          })
+          .catch((error) => {
+            Swal.fire({
+              icon: "error",
+              title: "Error sending password reset email",
+              text: error.message,
+            });
+          });
+      } else if (result.isConfirmed) {
+        Swal.fire({
+          icon: "warning",
+          title: "Please enter a valid email",
+          showConfirmButton: true,
+        });
+      }
+    });
   };
 
   return (
@@ -154,7 +195,13 @@ const handleGoogleLogIn = () => {
               At least one uppercase letter
             </p>
             {/* Forgot password */}
-            <Link className="link link-hover">Forgot password?</Link>
+            <button
+              type="button"
+              onClick={sendResetPassword}
+              className="link link-hover"
+            >
+              Forgot password?
+            </button>
             <button type="submit" className="btn btn-info mt-4 md:text-xl">
               LogIn
             </button>

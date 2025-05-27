@@ -4,6 +4,7 @@ import {
   createUserWithEmailAndPassword,
   GoogleAuthProvider,
   onAuthStateChanged,
+  sendPasswordResetEmail,
   signInWithEmailAndPassword,
   signInWithPopup,
   signOut,
@@ -47,6 +48,8 @@ const ContextProvider = ({ children }) => {
       .catch(() => {});
   };
 
+
+    // Function to handle user logout
   const handleLogOut = () => {
     return signOut(auth).then(()=>{
         Swal.fire({
@@ -57,6 +60,10 @@ const ContextProvider = ({ children }) => {
             timer: 1500,
         });
     })
+  }
+
+  const resetPassword = (email) =>{
+    return sendPasswordResetEmail(auth,email)
   }
 
   // Function to update user profile information
@@ -85,6 +92,7 @@ const ContextProvider = ({ children }) => {
     googleLogin,
     handleLogOut,
     updateUserProfile,
+    resetPassword,
     loading,
   };
   return <AuthContext value={userInfo}>{children}</AuthContext>;
