@@ -1,6 +1,10 @@
 import React, { useState } from "react";
 import { AuthContext } from "./AuthContext";
-import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
+import {
+  createUserWithEmailAndPassword,
+  signInWithEmailAndPassword,
+  updateProfile,
+} from "firebase/auth";
 import { auth } from "../FireBase/fireBase.config";
 
 const ContextProvider = ({ children }) => {
@@ -16,8 +20,15 @@ const ContextProvider = ({ children }) => {
     return createUserWithEmailAndPassword(auth, email, password);
   };
 
-  //
+  // Function to log in a user with email and password
+  const userLogin = (email, password) => {
+    setLoading(true);
+    return signInWithEmailAndPassword(auth, email, password);
+  };
+
+  // Function to update user profile information
   const updateUserProfile = (updatedData) => {
+    setLoading(true);
     return updateProfile(auth.currentUser, updatedData);
   };
 
@@ -25,6 +36,7 @@ const ContextProvider = ({ children }) => {
     user,
     setUser,
     createUser,
+    userLogin,
     updateUserProfile,
     loading,
   };

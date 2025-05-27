@@ -38,11 +38,11 @@ export const Routes = createBrowserRouter([
         Component: MyPlants,
       },
       {
-        path: "/Auth/Login",
+        path: "/auth/login",
         Component: Login,
       },
       {
-        path: "/Auth/Register",
+        path: "/auth/register",
         Component: Register,
       },
       {

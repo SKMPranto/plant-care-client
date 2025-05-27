@@ -6,12 +6,12 @@ import Swal from "sweetalert2";
 import Title from "../Components/Title";
 
 const Register = () => {
-    Title("Register | Plant-Care");
+  Title("Register");
   // State to manage password visibility
   const { createUser, updateUserProfile } = use(AuthContext);
   const [showPassword, SetShowPassword] = useState(false);
-  const [redirect,setRedirect]=useState(false);
-  if(redirect) return <Navigate to="/" />
+  const [redirect, setRedirect] = useState(false);
+  if (redirect) return <Navigate to="/" />;
 
   const handleRegister = (e) => {
     e.preventDefault();
@@ -37,8 +37,15 @@ const Register = () => {
           });
         });
       })
-      .catch(() => {});
-    // form.reset();
+      .catch((e) => {
+          Swal.fire({
+            position: "center",
+            icon: "error",
+            title: e.code,
+            showConfirmButton: true,
+          });
+      });
+    form.reset();
   };
 
   return (
@@ -243,7 +250,7 @@ const Register = () => {
           </div>
           <p className="text-center text-sm opacity-100 mt-2">
             Already have an account?{" "}
-            <NavLink to="/Auth/Login" className="text-blue-500 font-bold">
+            <NavLink to="/auth/login" className="text-blue-500 font-bold">
               Login
             </NavLink>
           </p>
