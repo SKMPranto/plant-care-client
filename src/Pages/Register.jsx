@@ -1,6 +1,6 @@
 import React, { use, useState } from "react";
 import { ImEye, ImEyeBlocked } from "react-icons/im";
-import { Navigate, NavLink } from "react-router";
+import { Navigate, NavLink, useLocation, useNavigate } from "react-router";
 import { AuthContext } from "../AuthContext/AuthContext";
 import Swal from "sweetalert2";
 import Title from "../Components/Title";
@@ -8,10 +8,10 @@ import Title from "../Components/Title";
 const Register = () => {
   Title("Register");
   // State to manage password visibility
-  const { createUser, updateUserProfile } = use(AuthContext);
+  const { createUser, updateUserProfile, googleLogin } = use(AuthContext);
   const [showPassword, SetShowPassword] = useState(false);
-  const [redirect, setRedirect] = useState(false);
-  if (redirect) return <Navigate to="/" />;
+  const location = useLocation();
+  const Navigate = useNavigate();
 
   const handleRegister = (e) => {
     e.preventDefault();
@@ -32,20 +32,33 @@ const Register = () => {
             title: "Registration successful",
             showConfirmButton: false,
             timer: 1500,
-          }).then(() => {
-            setRedirect(true);
           });
         });
+        Navigate(`${location.state ? location.state : "/"}`);
       })
       .catch((e) => {
-          Swal.fire({
-            position: "center",
-            icon: "error",
-            title: e.code,
-            showConfirmButton: true,
-          });
+        Swal.fire({
+          position: "center",
+          icon: "error",
+          title: e.code,
+          showConfirmButton: true,
+        });
       });
     form.reset();
+  };
+
+  const handleGoogleLogIn = () => {
+    googleLogin()
+      .then(() => {
+        Navigate(location.state || "/"); // Navigate to the previous page or home
+      })
+      .catch((error) => {
+        Swal.fire({
+          icon: "error",
+          title: "Google login failed",
+          text: error.message,
+        });
+      });
   };
 
   return (
@@ -215,7 +228,7 @@ const Register = () => {
           <div>
             {/* Google LogIn */}
             <button
-              //   onClick={handleGoogleLogIn}
+              onClick={handleGoogleLogIn}
               className="btn bg-white text-black border-[#e5e5e5] w-full md:text-xl"
             >
               <svg

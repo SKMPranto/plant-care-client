@@ -10,6 +10,7 @@ import ErrorPage from "../Pages/ErrorPage";
 import MainLayOut from "../MainLayOut/MainLayOut";
 import Spinner from "../Components/Spinner";
 import PlantsDetails from "../Pages/PlantsDetails";
+import PrivateRoutes from "./PrivateRoutes";
 
 export const Routes = createBrowserRouter([
   {
@@ -25,17 +26,17 @@ export const Routes = createBrowserRouter([
       },
       {
         path: "/Add-Plants",
-        Component: AddPlants,
+        element:<PrivateRoutes><AddPlants></AddPlants></PrivateRoutes>
       },
       {
         path: "/All-Plants",
         HydrateFallback: Spinner,
         loader: () => fetch("http://localhost:3000/plants"),
-        Component: AllPlants,
+        element:<PrivateRoutes><AllPlants></AllPlants></PrivateRoutes>
       },
       {
         path: "/My-Plants",
-        Component: MyPlants,
+        element:<PrivateRoutes><MyPlants></MyPlants></PrivateRoutes>
       },
       {
         path: "/auth/login",
@@ -50,7 +51,7 @@ export const Routes = createBrowserRouter([
         hydrateFallbackElement: <Spinner></Spinner>,
         loader: ({ params }) =>
           fetch(`http://localhost:3000/plants/${params.id}`),
-        Component: PlantsDetails,
+        element:<PrivateRoutes><PlantsDetails></PlantsDetails></PrivateRoutes>
       },
       {
         path: "*",

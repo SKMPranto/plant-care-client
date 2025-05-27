@@ -1,5 +1,5 @@
 import React, { use, useState } from "react";
-import { Link, NavLink } from "react-router";
+import { Link, Navigate, NavLink, useLocation, useNavigate } from "react-router";
 import Title from "../Components/Title";
 import { ImEye, ImEyeBlocked } from "react-icons/im";
 import { AuthContext } from "../AuthContext/AuthContext";
@@ -9,7 +9,9 @@ const Login = () => {
   Title("Login");
   // State to manage password visibility
   const [showPassword, SetShowPassword] = useState(false);
-  const { userLogin } = use(AuthContext);
+  const { userLogin, googleLogin } = use(AuthContext);
+  const location = useLocation();
+  const Navigate = useNavigate();
 
   const handleLogin = (e) => {
     e.preventDefault();
@@ -27,6 +29,7 @@ const Login = () => {
           showConfirmButton: false,
           timer: 1500,
         });
+        Navigate(`${location.state ? location.state : "/"}`);
       })
       .catch(() => {
         Swal.fire({
@@ -38,6 +41,21 @@ const Login = () => {
       });
     form.reset();
   };
+
+const handleGoogleLogIn = () => {
+    googleLogin()
+      .then(() => {
+        Navigate(location.state || "/"); // Navigate to the previous page or home
+      })
+      .catch((error) => {
+        Swal.fire({
+          icon: "error",
+          title: "Google login failed",
+          text: error.message,
+        });
+      });
+  };
+
   return (
     <div className="hero md:min-h-fit lg:w-[30%] mx-auto shadow-gray-50 shadow-lg rounded-2xl md:my-20">
       <div className="card bg-base-300 w-full shrink-0 mx-auto">
@@ -144,7 +162,7 @@ const Login = () => {
           <div>
             {/* Google LogIn */}
             <button
-              //   onClick={handleGoogleLogIn}
+              onClick={handleGoogleLogIn}
               className="btn bg-white text-black border-[#e5e5e5] w-full md:text-xl"
             >
               <svg

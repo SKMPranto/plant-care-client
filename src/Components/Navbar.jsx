@@ -1,18 +1,21 @@
-import React, { useEffect } from "react";
+import React, { use, useEffect } from "react";
 import { HiOutlineLogout } from "react-icons/hi";
 import { Link, NavLink } from "react-router";
 // import { AuthContext } from "../Context/AuthContext";
 import { TbLogin } from "react-icons/tb";
+import { AuthContext } from "../AuthContext/AuthContext";
 
 const Navbar = () => {
-  //   const { user, userLogOut } = use(AuthContext);
-  //   const handleLogOut = () => {
-  //     userLogOut();
-  //   };
+  const {user,handleLogOut}= use(AuthContext);
 
-  // Theme Toggler
+  // Handle LogOut
+  const handle_LogOut = () => {
+    handleLogOut()
+  }
 
-  // On toggle
+
+
+  // Theme Toggler || On toggle
   const handleThemeToggle = (e) => {
     const theme = e.target.checked ? "dark" : "light";
     document.documentElement.setAttribute("data-theme", theme);
@@ -170,14 +173,14 @@ const Navbar = () => {
       </div>
       <div className="navbar-end space-x-1">
         {/* Profile in navbar */}
-        {/* <div className="dropdown dropdown-hover dropdown-end">
+        <div className="dropdown dropdown-hover dropdown-end">
           <div
             tabIndex={0}
             role="button"
             className="btn btn-ghost btn-circle avatar"
           >
             <div className="w-10 rounded-full">
-              <img alt="Image" src={user ? user.photoURL : "/user-icon.png"} />
+              <img alt="Image" src={user ? user.photoURL : "https://i.ibb.co/jZDk7XVG/user-icon.png"} />
             </div>
           </div>
           <ul
@@ -191,13 +194,13 @@ const Navbar = () => {
                 : "Please LogIn First"}
             </li>
           </ul>
-        </div> */}
+        </div>
         {/* Logout BTN */}
-        {/* <div>
+        <div>
           {user ? (
             <Link
               to="/"
-              onClick={handleLogOut}
+              onClick={handle_LogOut}
               className="btn bg-green-500 text-white hover:text-green-500 hover:bg-white hover:border-green-500  md:text-lg rounded-4xl md:font-extrabold"
             >
               LogOut <HiOutlineLogout />
@@ -210,7 +213,7 @@ const Navbar = () => {
               LogIn <TbLogin />
             </Link>
           )}
-        </div> */}
+        </div>
         {/* Theme toggle Button */}
         <div className="navbar p-0 bg-base-100 mt-2 mb-4">
           {/* ... your other navbar code ... */}
