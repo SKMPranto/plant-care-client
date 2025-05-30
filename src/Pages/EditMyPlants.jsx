@@ -1,52 +1,76 @@
 import React from "react";
 import Title from "../Components/Title";
+import { useLoaderData } from "react-router";
 import Swal from "sweetalert2";
 
-const AddPlants = () => {
+const EditMyPlants = () => {
+  Title("Edit Your Plants");
+  const {
+    _id,
+    userName,
+    email,
+    plantName,
+    category,
+    careLevel,
+    wateringFrequency,
+    lastWateredDate,
+    nextWateringDate,
+    healthStatus,
+    url,
+    description,
+  } = useLoaderData();
+
   const handleSubmit = (e) => {
     e.preventDefault();
     const form = e.target;
     const formData = new FormData(form);
-    const newPlantData = Object.fromEntries(formData.entries());
+    const editedPlantData = Object.fromEntries(formData.entries());
 
-    // send Plant data to mongodb database
-
-    fetch("http://localhost:3000/plants", {
-      method: "POST",
+    // You can now use the editedPlantData object to send the updated plant data to your server
+    fetch(`http://localhost:3000/plants/${_id}`, {
+      method: "PUT",
       headers: {
         "content-type": "application/json",
       },
-      body: JSON.stringify(newPlantData),
+      body: JSON.stringify(editedPlantData),
     })
       .then((res) => res.json())
       .then((data) => {
-        if (data.insertedId) {
+        if (data.modifiedCount) {
           Swal.fire({
             position: "center",
             icon: "success",
-            title: "New Plant Added Successfully",
+            title: "Plant Edited Successfully",
             showConfirmButton: false,
             timer: 1500,
           });
-          form.reset();
+        } else {
+          Swal.fire({
+            position: "center",
+            icon: "info",
+            title: "No changes made to the plant",
+            showConfirmButton: false,
+            timer: 1500,
+          });
         }
       });
+
+
   };
-  Title("Add Plants");
   return (
     <div className="p-10 lg:w-[70%] mx-auto">
       <h1 className="text-3xl md:text-5xl lg:text-7xl text-center permanent-marker-regular text-green-500">
-        Add Plants
+        Edit Yours Plants
       </h1>
       <p className="text-center py-5 md:text-xl lg:text-2xl">
-        You can add plants here and monitor them
+        You can edit your plants here and monitor them
       </p>
       <form onSubmit={handleSubmit}>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-2">
           {/* User Name Input Field */}
           <fieldset>
             <legend className="fieldset-legend">Username</legend>
-            <label className="input validator w-full">
+            <label className="input w-full">
               <svg
                 className="h-[1em] opacity-50"
                 xmlns="http://www.w3.org/2000/svg"
@@ -66,7 +90,7 @@ const AddPlants = () => {
               <input
                 type="text"
                 name="userName"
-                required
+                defaultValue={userName}
                 placeholder="Username"
                 pattern="[A-Za-z][A-Za-z0-9\- ]*"
                 minLength="3"
@@ -74,16 +98,11 @@ const AddPlants = () => {
                 title="Only letters, numbers or dash"
               />
             </label>
-            <p className="validator-hint hidden">
-              Must be 3 to 30 characters
-              <br />
-              containing only letters, numbers or dash
-            </p>
           </fieldset>
           {/* Email Input Field */}
           <fieldset>
             <legend className="fieldset-legend">Email</legend>
-            <label className="input validator w-full">
+            <label className="input w-full">
               <svg
                 className="h-[1em] opacity-50"
                 xmlns="http://www.w3.org/2000/svg"
@@ -103,35 +122,33 @@ const AddPlants = () => {
               <input
                 type="email"
                 name="email"
+                defaultValue={email}
                 placeholder="mail@site.com"
-                required
               />
             </label>
-            <p className="validator-hint hidden">Enter valid email address</p>
           </fieldset>
           {/* Plant name Input field */}
           <fieldset>
             <legend className="fieldset-legend">Enter Plant Name</legend>
-            <label className="input validator w-full">
+            <label className="input w-full">
               <input
                 type="text"
                 name="plantName"
+                defaultValue={plantName}
                 placeholder="Plant Name"
-                required
               />
             </label>
-            <p className="validator-hint hidden">Please Enter Plant Name</p>
           </fieldset>
           {/* Category input field */}
           <fieldset>
             <legend className="fieldset-legend">Category</legend>
-            <label className="input validator w-full">
+            <label className="input w-full">
               <input
                 type="text"
                 name="category"
+                defaultValue={category}
                 placeholder="Please select Category"
                 list="Category"
-                required
               />
               <datalist id="Category">
                 {/* Fruit & Shade Trees */}
@@ -157,24 +174,23 @@ const AddPlants = () => {
 
                 {/* Decorative/Other Garden Plants */}
                 <option value="Bougainvillea"></option>
-                <option value="Aloe Vera"></option>
+                <option value="AloeVera"></option>
                 <option value="Jasmine"></option>
-                <option value="Money Plant"></option>
-                <option value="Snake Plant"></option>
+                <option value="MoneyPlant"></option>
+                <option value="SnakePlant"></option>
               </datalist>
             </label>
-            <p className="validator-hint hidden">Please Select a Category</p>
           </fieldset>
           {/* Care level input field */}
           <fieldset>
             <legend className="fieldset-legend">Care Level</legend>
-            <label className="input validator w-full">
+            <label className="input w-full">
               <input
                 type="text"
                 name="careLevel"
+                defaultValue={careLevel}
                 placeholder="Please select Care Level"
                 list="care-level"
-                required
               />
               <datalist id="care-level">
                 <option value="Easy"></option>
@@ -182,22 +198,18 @@ const AddPlants = () => {
                 <option value="Difficult"></option>
               </datalist>
             </label>
-            <p className="validator-hint hidden">Please Select Care Level</p>
           </fieldset>
           {/* Watering Frequency input field */}
           <fieldset>
             <legend className="fieldset-legend">Watering Frequency</legend>
-            <label
-              htmlFor="wateringFrequencyInput"
-              className="input validator w-full"
-            >
+            <label htmlFor="wateringFrequencyInput" className="input w-full">
               <input
                 type="text"
                 id="wateringFrequencyInput"
                 name="wateringFrequency"
+                defaultValue={wateringFrequency}
                 placeholder="Please select Watering Frequency"
                 list="wateringFrequencyOptions"
-                required
               />
             </label>
             <datalist id="wateringFrequencyOptions">
@@ -209,40 +221,39 @@ const AddPlants = () => {
               <option value="Monthly" />
               <option value="As Needed (Check Soil Moisture)" />
             </datalist>
-            <p className="validator-hint hidden">
-              Please select a watering frequency
-            </p>
           </fieldset>
           {/* Last watered date input filed */}
           <fieldset>
             <legend className="fieldset-legend">Last Watered Date</legend>
-            <label className="input validator w-full">
-              <input type="date" name="lastWateredDate" required />
+            <label className="input w-full">
+              <input
+                type="date"
+                name="lastWateredDate"
+                defaultValue={lastWateredDate}
+              />
             </label>
-            <p className="validator-hint hidden">
-              Please Select Last Watered Date
-            </p>
           </fieldset>
           {/* Next Watering Date input filed */}
           <fieldset>
             <legend className="fieldset-legend">Next Watering Date</legend>
-            <label className="input validator w-full">
-              <input type="date" name="nextWateringDate" required />
+            <label className="input w-full">
+              <input
+                type="date"
+                name="nextWateringDate"
+                defaultValue={nextWateringDate}
+              />
             </label>
-            <p className="validator-hint hidden">
-              Please Select Next Watering Date
-            </p>
           </fieldset>
           {/* Health Status input filed */}
           <fieldset>
             <legend className="fieldset-legend">Health Status</legend>
-            <label className="input validator w-full">
+            <label className="input w-full">
               <input
                 type="text"
                 name="healthStatus"
+                defaultValue={healthStatus}
                 placeholder="Please select Health Status"
                 list="healthStatus"
-                required
               />
               <datalist id="healthStatus">
                 <option value="Healthy"></option>
@@ -258,12 +269,11 @@ const AddPlants = () => {
                 <option value="Dead">Dead</option>
               </datalist>
             </label>
-            <p className="validator-hint hidden">Please Select Health Status</p>
           </fieldset>
           {/* Image Url input filed */}
           <fieldset>
             <legend className="fieldset-legend">Image URL</legend>
-            <label className="input validator w-full">
+            <label className="input w-full">
               <svg
                 className="h-[1em] opacity-50"
                 xmlns="http://www.w3.org/2000/svg"
@@ -283,36 +293,32 @@ const AddPlants = () => {
               <input
                 type="url"
                 name="url"
-                required
+                defaultValue={url}
                 placeholder="https://"
                 pattern="^(https?://)?([a-zA-Z0-9]([a-zA-Z0-9\-].*[a-zA-Z0-9])?\.)+[a-zA-Z].*$"
                 title="Must be valid URL"
               />
             </label>
-            <p className="validator-hint">Must be valid URL</p>
           </fieldset>
         </div>
 
         {/* Description box input filed */}
         <fieldset>
           <legend className="fieldset-legend">Description</legend>
-          <label className="validator w-full">
+          <label className=" w-full">
             <textarea
               name="description"
+              defaultValue={description}
               placeholder="Description about your plant"
               className="textarea textarea-info w-full"
-              required
             ></textarea>
           </label>
-          <p className="validator-hint hidden">
-            Please give a description about your plant
-          </p>
         </fieldset>
 
         {/* submit button */}
         <button
           type="submit"
-          className="btn btn-block my-3 btn-soft btn-success text-lg font-bold"
+          className="btn btn-block my-3 btn-soft btn-success text-lg font-bold "
         >
           Submit
         </button>
@@ -321,4 +327,4 @@ const AddPlants = () => {
   );
 };
 
-export default AddPlants;
+export default EditMyPlants;

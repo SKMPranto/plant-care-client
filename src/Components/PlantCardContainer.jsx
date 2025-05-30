@@ -25,9 +25,9 @@ const PlantCardContainer = ({ plants }) => {
         <button
           onClick={() => {
             setViewAll(!viewAll);
-            if (viewAll) window.scrollTo(0, 550);
+            if (viewAll) window.scrollTo(0, 470);
           }}
-          className="btn bg-green-500 text-white hover:text-green-500 hover:bg-white hover:border-green-500  lg:text-xl font-bold rounded-4xl"
+          className="btn btn-soft btn-success lg:text-xl font-bold rounded-4xl"
         >
           {viewAll ? "Show Less Plants" : "Show All Plants"}
         </button>

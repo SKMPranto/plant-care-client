@@ -1,36 +1,37 @@
-import React, { use, useEffect } from "react";
+import React, { use, useEffect, useState } from "react";
 import { HiOutlineLogout } from "react-icons/hi";
-import { Link, NavLink } from "react-router";
+import { Link, NavLink, useNavigate } from "react-router";
 // import { AuthContext } from "../Context/AuthContext";
 import { TbLogin } from "react-icons/tb";
 import { AuthContext } from "../AuthContext/AuthContext";
 
 const Navbar = () => {
-  const {user,handleLogOut}= use(AuthContext);
+  const Navigate = useNavigate();
+  const { user, handleLogOut } = use(AuthContext);
+
+  const [theme, setTheme] = useState(
+    localStorage.getItem("theme") === "light" ? "light" : "dark"
+  );
+
+  const handleThemeChange = (event) => {
+    const newTheme = event.target.checked ? "dark" : "light";
+    setTheme(newTheme);
+    localStorage.setItem("theme", newTheme);
+  };
+
+  useEffect(() => {
+    const savedTheme = localStorage.getItem("theme");
+    setTheme(savedTheme);
+    document.querySelector("html").setAttribute("data-theme", savedTheme);
+  }, [theme]);
 
   // Handle LogOut
   const handle_LogOut = () => {
-    handleLogOut()
-  }
-
-
-
-  // Theme Toggler || On toggle
-  const handleThemeToggle = (e) => {
-    const theme = e.target.checked ? "dark" : "light";
-    document.documentElement.setAttribute("data-theme", theme);
-    localStorage.setItem("theme", theme);
+    handleLogOut().then(() => Navigate("/"));
   };
 
-  // On load (e.g. in useEffect)
-  useEffect(() => {
-    const savedTheme = localStorage.getItem("theme") || "dark";
-    document.documentElement.setAttribute("data-theme", savedTheme);
-  }, []);
-
   return (
-    <div className="navbar fixed top-0 left-0 z-50 bg-base-100 backdrop-blur-xl">
-
+    <div className="navbar fixed top-0 left-0 z-50  backdrop-blur-xl">
       <div className="navbar-start">
         <div className="dropdown">
           <div tabIndex={0} role="button" className="lg:hidden mr-4">
@@ -181,7 +182,14 @@ const Navbar = () => {
             className="btn btn-ghost btn-circle avatar"
           >
             <div className="w-10 rounded-full">
-              <img alt="Image" src={user ? user.photoURL : "https://i.ibb.co/jZDk7XVG/user-icon.png"} />
+              <img
+                alt="Image"
+                src={
+                  user
+                    ? user.photoURL
+                    : "https://i.ibb.co/jZDk7XVG/user-icon.png"
+                }
+              />
             </div>
           </div>
           <ul
@@ -202,28 +210,28 @@ const Navbar = () => {
             <Link
               to="/"
               onClick={handle_LogOut}
-              className="btn bg-green-500 text-white hover:text-green-500 hover:bg-white hover:border-green-500  md:text-lg rounded-4xl md:font-extrabold"
+              className="btn btn-soft btn-success md:text-lg rounded-4xl md:font-extrabold"
             >
               LogOut <HiOutlineLogout />
             </Link>
           ) : (
             <Link
               to="/auth/login"
-              className="btn bg-green-500 text-white hover:text-green-500 hover:bg-white hover:border-green-500  md:text-lg rounded-4xl md:font-extrabold"
+              className="btn btn-soft btn-success md:text-lg rounded-4xl md:font-extrabold"
             >
               LogIn <TbLogin />
             </Link>
           )}
         </div>
         {/* Theme toggle Button */}
-        <div className="navbar p-0 bg-base-100 mt-2 mb-4 lg:w-23 ml-5">
+        <div className="navbar p-0 bg-base-100 mt-2 mb-4 md:w-23 ml-5">
           <div className="navbar-end space-x-1">
             {/* Theme toggle Button */}
             <div>
               <label className="toggle text-base-content">
                 <input
                   type="checkbox"
-                  onChange={handleThemeToggle}
+                  onChange={handleThemeChange}
                   value="synthwave"
                   className="theme-controller"
                 />

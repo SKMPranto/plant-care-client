@@ -22,7 +22,7 @@ const PlantCard = ({ plant }) => {
         <div className="card-actions justify-end">
           <NavLink
             to={`/Plants-Details/${_id}`}
-            className="btn bg-green-500 text-white hover:text-green-500 hover:bg-white hover:border-green-500  md:text-lg rounded md:font-extrabold w-full"
+            className="btn btn-soft btn-success md:text-lg rounded md:font-extrabold w-full"
           >
             View More Details{" "}
           </NavLink>

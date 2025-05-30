@@ -11,7 +11,7 @@ const ErrorPage = () => {
             </div>
             <p className='pt-5 lg:pt-0 text-center lg:text-4xl font-extrabold text-red-500'>Oops! The page you're looking for doesn't exist</p>
             <div className='flex justify-center my-20'>
-            <Link to='/' className='btn bg-green-500 text-white hover:text-green-500 hover:bg-white hover:border-green-500 lg:text-xl font-bold rounded-4xl p-7'>Go Back Home</Link>
+            <Link to='/' className='btn btn-soft btn-success lg:text-xl font-bold rounded-4xl p-7'>Go Back Home</Link>
             </div>
         </div>
     );

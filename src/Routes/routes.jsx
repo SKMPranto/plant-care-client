@@ -11,6 +11,7 @@ import MainLayOut from "../MainLayOut/MainLayOut";
 import Spinner from "../Components/Spinner";
 import PlantsDetails from "../Pages/PlantsDetails";
 import PrivateRoutes from "./PrivateRoutes";
+import EditMyPlants from "../Pages/EditMyPlants";
 
 export const Routes = createBrowserRouter([
   {
@@ -52,6 +53,12 @@ export const Routes = createBrowserRouter([
         loader: ({ params }) =>
           fetch(`http://localhost:3000/plants/${params.id}`),
         element:<PrivateRoutes><PlantsDetails></PlantsDetails></PrivateRoutes>
+      },
+      {
+        path: "/Edit-My-Plants/:id",
+        HydrateFallback:Spinner,
+        loader:({params})=>fetch(`http://localhost:3000/plants/${params.id}`),
+        element:<PrivateRoutes> <EditMyPlants></EditMyPlants> </PrivateRoutes>
       },
       {
         path: "*",
