@@ -224,7 +224,7 @@ const Navbar = () => {
           )}
         </div>
         {/* Theme toggle Button */}
-        <div className="navbar p-0 bg-base-100 mt-2 mb-4 md:w-23 ml-5">
+        <div className="navbar p-0 mt-2 mb-4 md:w-23 ml-5">
           <div className="navbar-end space-x-1">
             {/* Theme toggle Button */}
             <div>
