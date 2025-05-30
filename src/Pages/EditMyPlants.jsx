@@ -27,7 +27,7 @@ const EditMyPlants = () => {
     const editedPlantData = Object.fromEntries(formData.entries());
 
     // You can now use the editedPlantData object to send the updated plant data to your server
-    fetch(`http://localhost:3000/plants/${_id}`, {
+    fetch(`https://plant-care-server-dun.vercel.app/plants/${_id}`, {
       method: "PUT",
       headers: {
         "content-type": "application/json",
@@ -54,8 +54,6 @@ const EditMyPlants = () => {
           });
         }
       });
-
-
   };
   return (
     <div className="p-10 lg:w-[70%] mx-auto">

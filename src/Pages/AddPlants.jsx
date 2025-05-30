@@ -11,7 +11,7 @@ const AddPlants = () => {
 
     // send Plant data to mongodb database
 
-    fetch("http://localhost:3000/plants", {
+    fetch("https://plant-care-server-dun.vercel.app/plants", {
       method: "POST",
       headers: {
         "content-type": "application/json",

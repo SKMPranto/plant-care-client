@@ -4,7 +4,7 @@ import { MdDeleteForever } from "react-icons/md";
 import { NavLink } from "react-router";
 import Swal from "sweetalert2";
 
-const MyPlantCard = ({ plant , onDelete}) => {
+const MyPlantCard = ({ plant, onDelete }) => {
   const { plantName, category, careLevel, wateringFrequency, url, _id } = plant;
 
   const handleDelete = (id) => {
@@ -27,7 +27,7 @@ const MyPlantCard = ({ plant , onDelete}) => {
       })
       .then((result) => {
         if (result.isConfirmed) {
-          fetch(`http://localhost:3000/plants/${id}`, {
+          fetch(`https://plant-care-server-dun.vercel.app/plants/${id}`, {
             method: "DELETE",
           })
             .then((res) => res.json())

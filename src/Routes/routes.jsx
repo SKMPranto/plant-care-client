@@ -22,22 +22,34 @@ export const Routes = createBrowserRouter([
       {
         index: true,
         HydrateFallback: Spinner,
-        loader: () => fetch("http://localhost:3000/plants"),
+        loader: () => fetch("https://plant-care-server-dun.vercel.app/plants"),
         Component: Home,
       },
       {
         path: "/Add-Plants",
-        element:<PrivateRoutes><AddPlants></AddPlants></PrivateRoutes>
+        element: (
+          <PrivateRoutes>
+            <AddPlants></AddPlants>
+          </PrivateRoutes>
+        ),
       },
       {
         path: "/All-Plants",
         HydrateFallback: Spinner,
-        loader: () => fetch("http://localhost:3000/plants"),
-        element:<PrivateRoutes><AllPlants></AllPlants></PrivateRoutes>
+        loader: () => fetch("https://plant-care-server-dun.vercel.app/plants"),
+        element: (
+          <PrivateRoutes>
+            <AllPlants></AllPlants>
+          </PrivateRoutes>
+        ),
       },
       {
         path: "/My-Plants",
-        element:<PrivateRoutes><MyPlants></MyPlants></PrivateRoutes>
+        element: (
+          <PrivateRoutes>
+            <MyPlants></MyPlants>
+          </PrivateRoutes>
+        ),
       },
       {
         path: "/auth/login",
@@ -51,14 +63,24 @@ export const Routes = createBrowserRouter([
         path: "/Plants-Details/:id",
         hydrateFallbackElement: <Spinner></Spinner>,
         loader: ({ params }) =>
-          fetch(`http://localhost:3000/plants/${params.id}`),
-        element:<PrivateRoutes><PlantsDetails></PlantsDetails></PrivateRoutes>
+          fetch(`https://plant-care-server-dun.vercel.app/plants/${params.id}`),
+        element: (
+          <PrivateRoutes>
+            <PlantsDetails></PlantsDetails>
+          </PrivateRoutes>
+        ),
       },
       {
         path: "/Edit-My-Plants/:id",
-        HydrateFallback:Spinner,
-        loader:({params})=>fetch(`http://localhost:3000/plants/${params.id}`),
-        element:<PrivateRoutes> <EditMyPlants></EditMyPlants> </PrivateRoutes>
+        HydrateFallback: Spinner,
+        loader: ({ params }) =>
+          fetch(`https://plant-care-server-dun.vercel.app/plants/${params.id}`),
+        element: (
+          <PrivateRoutes>
+            {" "}
+            <EditMyPlants></EditMyPlants>{" "}
+          </PrivateRoutes>
+        ),
       },
       {
         path: "*",
