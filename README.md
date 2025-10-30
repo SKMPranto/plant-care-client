@@ -1,12 +1,31 @@
-# React + Vite
+# 🌿 Plant Care
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+**Live Demo:** [Plant Care Website](https://plant-care-web.web.app/)
 
-Currently, two official plugins are available:
+Plant Care is a full-stack MERN (MongoDB, Express, React, Node.js) application designed to help users manage and monitor their plants with ease.  
+Users can **add, view, and track plants**, and enjoy a **theme toggle** feature for light and dark modes.  
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+---
 
-## Expanding the ESLint configuration
+## 🚀 Features
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+- 🌱 Add, edit, and delete plant information  
+- 🪴 Monitor plant details and updates  
+- 🌗 Theme changer — switch between **Light** and **Dark** modes  
+- ⚡ Responsive UI built with **Tailwind CSS** and **DaisyUI**  
+- 🔐 Secure backend with Express and MongoDB  
+- 🔄 Smooth user experience using React hooks and RESTful APIs  
+
+---
+
+## 🧩 Tech Stack
+
+| Category | Technologies |
+|-----------|---------------|
+| **Frontend** | React.js, Tailwind CSS, DaisyUI |
+| **Backend** | Node.js, Express.js |
+| **Database** | MongoDB |
+| **Hosting** | Firebase (Frontend), Render / Vercel (Backend) |
+| **Tools** | Git, VS Code |
+
+---
